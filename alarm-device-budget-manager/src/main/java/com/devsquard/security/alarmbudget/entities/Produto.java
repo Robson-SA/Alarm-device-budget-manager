@@ -2,21 +2,19 @@ package com.devsquard.security.alarmbudget.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
 @Entity(name = "tb_produto")
 public class Produto {
 	
+	
 	@Id 
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="PRO_ID")
 	private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "PRO_CLI_FK")
-	private Cliente cliente;
-	
 	@Column(name="PRO_COD")
 	private String codigo;
 	
@@ -25,15 +23,16 @@ public class Produto {
 	private String nomeProduto;
 
 
-	public Produto(Long id, Cliente cliente, String codigo, String nomeProduto) {
+	public Produto(String codigo, String nomeProduto) {
 		super();
-		this.id = id;
-		this.cliente = cliente;
 		this.codigo = codigo;
 		this.nomeProduto = nomeProduto;
 	}
 	
-
+	public Produto() {
+		
+	}
+	
 
 	public Long getId() {
 		return id;
@@ -43,17 +42,6 @@ public class Produto {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
-	public Cliente getCliente() {
-		return cliente;
-	}
-
-
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
-	}
-
 
 	public String getCodigo() {
 		return codigo;
@@ -72,6 +60,12 @@ public class Produto {
 
 	public void setNomeProduto(String nomeProduto) {
 		this.nomeProduto = nomeProduto;
+	}
+
+	@Override
+	public String toString() {
+		return "Produto [id=" + id + ", codigo=" + codigo + ", nomeProduto=" + nomeProduto
+				+ "]";
 	}
 	
 
