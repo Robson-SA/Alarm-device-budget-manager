@@ -1,5 +1,9 @@
 package com.devsquard.security.alarmbudget.repositories;
 
-public class ProdutoRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.devsquard.security.alarmbudget.entities.Produto;
+
+public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
 }
