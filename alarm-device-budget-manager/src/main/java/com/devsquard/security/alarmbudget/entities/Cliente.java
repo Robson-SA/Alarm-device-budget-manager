@@ -1,6 +1,6 @@
 package com.devsquard.security.alarmbudget.entities;
 
-import java.util.List;
+import java.util.HashSet;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -21,16 +21,20 @@ public class Cliente {
 	private int telefone;
 	@Email
 	private String email;
-	
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Produto> produtos;
 
-	public Cliente(Long id, int contato, int telefone, @Email String email, List<Produto> produtos) {
+	
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private HashSet<Projeto>projetos;
+
+	public Cliente() {
+
+	}
+
+	public Cliente(Long id, int contato, int telefone, @Email String email) {
 		this.id = id;
 		this.contato = contato;
 		this.telefone = telefone;
 		this.email = email;
-		this.produtos = produtos;
 	}
 
 	public Long getId() {
@@ -65,14 +69,6 @@ public class Cliente {
 		this.email = email;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
-    
-    
 
 }
