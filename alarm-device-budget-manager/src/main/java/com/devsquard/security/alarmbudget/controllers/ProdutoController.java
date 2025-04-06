@@ -1,8 +1,6 @@
 package com.devsquard.security.alarmbudget.controllers;
 
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -28,13 +26,11 @@ import jakarta.validation.Valid;
 @RequestMapping("/produto")
 public class ProdutoController {
 
-    private final ProdutoRepository produtoRepository;
-	
 	@Autowired
-	private ProdutoService service;
+	private final ProdutoService service;
 
-    ProdutoController(ProdutoRepository produtoRepository) {
-        this.produtoRepository = produtoRepository;
+    ProdutoController(ProdutoService service) {
+        this.service = service;
     }
     
     @GetMapping
