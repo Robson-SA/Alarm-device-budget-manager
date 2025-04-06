@@ -11,7 +11,7 @@ public class ClienteDTO {
 	@NotBlank(message = "O cnpj é obrigatório")
 	private String cnpj;
 
-	private String Contato;
+	private String contato;
 
 	private String telefone;
 
@@ -24,7 +24,7 @@ public class ClienteDTO {
 		super();
 		this.nome = nome;
 		this.cnpj = cnpj;
-		Contato = contato;
+		this.contato = contato;
 		this.telefone = telefone;
 		this.email = email;
 	}
@@ -54,11 +54,11 @@ public class ClienteDTO {
 
 
 	public String getContato() {
-		return Contato;
+		return contato;
 	}
 
 	public void setContato(String contato) {
-		Contato = contato;
+		contato = contato;
 	}
 
 	public String getTelefone() {
