@@ -1,8 +1,7 @@
 package com.devsquard.security.alarmbudget.entities;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.HashSet;
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -34,25 +33,22 @@ public class Projeto {
 	private String area;
 
 	@NotNull(message = "O endereço do projeto é obrigatório")
-	@Column(name = "PRJ_ENDERECO")
 	private String endereco;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
-	@Column(name = "PRJ_QUANTIDADE")
 	@NotNull(message = "A quantidade de items é obrigatório")
 	private Integer quantidade;
 	
-	@Column(name = "PRJ_OBSERVACAO")
 	private String observacao;
 
 	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
 	private HashSet<Produto> produtos = new HashSet<>();
 
 	@Column(name = "PRJ_DATA")
-	private String data;
+	private LocalDate data;
 	
 	
 	public Projeto(
@@ -67,7 +63,7 @@ public class Projeto {
 			Cliente cliente,
 			@NotNull(message = "A quantidade de items é obrigatório") 
 			Integer quantidade, String observacao,
-			HashSet<Produto> produtos, String data) {
+			HashSet<Produto> produtos, LocalDate data) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -164,12 +160,32 @@ public class Projeto {
 		this.produtos = produtos;
 	}
 
-	public String getData() {
+	public LocalDate getData() {
 		return data;
 	}
 
-	public void setData(String data) {
+	public void setData(LocalDate data) {
 		this.data = data;
+	}
+
+	public Integer getQuantidade() {
+		return quantidade;
+	}
+
+	public void setQuantidade(Integer quantidade) {
+		this.quantidade = quantidade;
+	}
+
+	public String getObservacao() {
+		return observacao;
+	}
+
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 }
