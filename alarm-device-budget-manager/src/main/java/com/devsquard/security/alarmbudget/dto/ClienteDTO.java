@@ -82,7 +82,11 @@ public class ClienteDTO {
 	}
 
 	public void setContato(String contato) {
+<<<<<<< HEAD
 		this.contato = contato;
+=======
+		contato = contato;
+>>>>>>> e9c3f0f55fb5fc454f2d4c64d76960b2f3c64575
 	}
 
 	public String getTelefone() {

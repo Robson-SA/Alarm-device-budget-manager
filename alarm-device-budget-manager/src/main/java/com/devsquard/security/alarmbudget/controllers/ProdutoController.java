@@ -1,8 +1,13 @@
 package com.devsquard.security.alarmbudget.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devsquard.security.alarmbudget.dto.ProdutoCodigoDTO;
 import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
-import com.devsquard.security.alarmbudget.dto.ProdutoUpdateDTO;
-import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 import com.devsquard.security.alarmbudget.services.ProdutoService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/produto")
@@ -33,15 +38,17 @@ public class ProdutoController {
     }
     
     @GetMapping
-    public ResponseEntity<List<Produto>> findAll(){
-    	List<Produto> produtos = service.findAll();
-    	return ResponseEntity.ok(produtos);
+    public ResponseEntity<Page<ProdutoDTO>> findAllPaged(
+        @PageableDefault(size = 10, sort = "nome") Pageable pageable
+    ) {
+        Page<ProdutoDTO> produtos = service.findAllPaged(pageable);
+        return ResponseEntity.ok(produtos);
     }
     
     
     @GetMapping(value = ("/buscar"))
-    public ResponseEntity<Produto> findByCodigo(@RequestBody ProdutoCodigoDTO dto){
-    	Produto produtos = service.findByCodigo(dto.getCodigo());
+    public ResponseEntity<ProdutoDTO> findByCodigo(@RequestBody ProdutoCodigoDTO dto){
+    	ProdutoDTO produtos = service.findByCodigo(dto.getCodigo());
     	return ResponseEntity.ok(produtos);
     }
     
@@ -55,17 +62,18 @@ public class ProdutoController {
     
 
 	@PostMapping
-	public ResponseEntity<Produto> save(@RequestBody ProdutoDTO dto) {
+	public ResponseEntity<ProdutoDTO> save(@RequestBody @Valid ProdutoDTO dto) {
 	
-		Produto produto = service.save(dto);
-		return ResponseEntity.ok(produto);
+		ProdutoDTO produto = service.save(dto);
+		return ResponseEntity.status(HttpStatus.CREATED).body(produto);
+		
 		
 	}
 	
 	@PutMapping(value = ("/update"))
-	public ResponseEntity<Produto> update(@RequestBody ProdutoUpdateDTO dto) {
+	public ResponseEntity<ProdutoDTO> update(@RequestBody @Valid ProdutoDTO dto) {
 		
-		Produto produto = service.update(dto);
+		ProdutoDTO produto = service.update(dto);
 		return ResponseEntity.ok(produto);
 		
 	}

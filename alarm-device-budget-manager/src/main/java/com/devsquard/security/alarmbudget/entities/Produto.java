@@ -20,12 +20,10 @@ public class Produto {
 
 	
 	@Column(name="PRO_COD", unique = true)
-	@NotNull(message = "O codigo do produto é obrigatório")
 	private String codigo;
 	
 	
 	@Column(name="PRO_NOME")
-	@NotNull(message = "O codigo do produto é obrigatório")
 	private String nome;
 	
 	@ManyToOne
