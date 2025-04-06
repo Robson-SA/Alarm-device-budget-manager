@@ -1,8 +1,12 @@
 package com.devsquard.security.alarmbudget.controllers;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -34,9 +38,11 @@ public class ProdutoController {
     }
     
     @GetMapping
-    public ResponseEntity<List<ProdutoDTO>> findAll(){
-    	List<ProdutoDTO> produtos = service.findAll();
-    	return ResponseEntity.ok(produtos);
+    public ResponseEntity<Page<ProdutoDTO>> findAllPaged(
+        @PageableDefault(size = 10, sort = "nome") Pageable pageable
+    ) {
+        Page<ProdutoDTO> produtos = service.findAllPaged(pageable);
+        return ResponseEntity.ok(produtos);
     }
     
     

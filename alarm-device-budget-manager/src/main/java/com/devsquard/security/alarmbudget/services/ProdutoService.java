@@ -1,8 +1,9 @@
 package com.devsquard.security.alarmbudget.services;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
@@ -33,11 +34,9 @@ public class ProdutoService {
 	}
 	
 	@Transactional
-	public List<ProdutoDTO> findAll() {
-		List<Produto> produtos = produtoRepository.findAll();
-	    return produtos.stream()
-	    		.map(produto -> new ProdutoDTO(produto.getCodigo(), produto.getNome()))
-	    		.toList();
+	public Page<ProdutoDTO> findAllPaged(Pageable pageable) {
+	    Page<Produto> produtos = produtoRepository.findAll(pageable);
+	    return produtos.map(produto -> new ProdutoDTO(produto.getCodigo(), produto.getNome()));
 	}
 	
 	@Transactional
