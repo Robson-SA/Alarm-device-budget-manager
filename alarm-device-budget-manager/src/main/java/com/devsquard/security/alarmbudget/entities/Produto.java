@@ -5,6 +5,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @Entity(name = "tb_produto")
 public class Produto {
@@ -15,18 +17,22 @@ public class Produto {
 	@Column(name="PRO_ID")
 	private Long id;
 
-	@Column(name="PRO_COD")
+	@Column(name="PRO_COD", unique = true)
 	private String codigo;
 	
 	
 	@Column(name="PRO_NOME")
-	private String nomeProduto;
+	private String nome;
+	
+	@ManyToOne
+    @JoinColumn(name = "projeto_id", nullable = true)
+    private Projeto projeto;
 
 
-	public Produto(String codigo, String nomeProduto) {
+	public Produto(String codigo, String nome) {
 		super();
 		this.codigo = codigo;
-		this.nomeProduto = nomeProduto;
+		this.nome = nome;
 	}
 	
 	public Produto() {
@@ -53,18 +59,18 @@ public class Produto {
 	}
 
 
-	public String getNomeProduto() {
-		return nomeProduto;
+	public String getNome() {
+		return nome;
 	}
 
 
-	public void setNomeProduto(String nomeProduto) {
-		this.nomeProduto = nomeProduto;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	@Override
 	public String toString() {
-		return "Produto [id=" + id + ", codigo=" + codigo + ", nomeProduto=" + nomeProduto
+		return "Produto [id=" + id + ", codigo=" + codigo + ", nomeProduto=" + nome
 				+ "]";
 	}
 	
