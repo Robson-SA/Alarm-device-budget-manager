@@ -1,6 +1,22 @@
+<<<<<<< HEAD
 
 ---INSERINDO DADOS NA TABELA TB_PRODUTO---
 
+=======
+<<<<<<< HEAD
+INSERT INTO tb_cliente (nome, cnpj, contato, telefone, email) VALUES ('Alpha Tech Solutions', '12.345.678/0001-10', 'Ana Costa', '(11) 98888-0001', 'ana@alphatech.com');
+INSERT INTO tb_cliente (nome, cnpj, contato, telefone, email) VALUES ('Beta Engenharia', '23.456.789/0001-20', 'Carlos Lima', '(21) 97777-0002', 'carlos@betaeng.com');
+INSERT INTO tb_cliente (nome, cnpj, contato, telefone, email) VALUES ('Gamma Construções', '34.567.890/0001-30', 'Marina Souza', '(31) 96666-0003', 'marina@gammaconst.com');
+INSERT INTO tb_cliente (nome, cnpj, contato, telefone, email) VALUES ('Delta Projetos', '45.678.901/0001-40', 'Paulo Mendes', '(41) 95555-0004', 'paulo@deltaproj.com');
+INSERT INTO tb_cliente (nome, cnpj, contato, telefone, email) VALUES ('Epsilon Instalações', '56.789.012/0001-50', 'Fernanda Rocha', '(51) 94444-0005', 'fernanda@epsilon.com');
+
+INSERT INTO TB_PROJETO (PRJ_DATA, QUANTIDADE, CLIENTE_ID, PRJ_NUMERO, ENDERECO, OBSERVACAO, PRJ_AREA, PRJ_NOME) VALUES ('2025-04-15', 3, 1, 1, 'Rua Alfa, 123', 'Instalação de câmeras', 'Residencial', 'Projeto Segurança Alfa');
+INSERT INTO TB_PROJETO (PRJ_DATA, QUANTIDADE, CLIENTE_ID, PRJ_NUMERO, ENDERECO, OBSERVACAO, PRJ_AREA, PRJ_NOME) VALUES ('2025-04-20', 7, 2, 2, 'Av. Beta, 456', 'Manutenção de alarmes', 'Comercial', 'Projeto Alarme Beta');
+INSERT INTO TB_PROJETO (PRJ_DATA, QUANTIDADE, CLIENTE_ID, PRJ_NUMERO, ENDERECO, OBSERVACAO, PRJ_AREA, PRJ_NOME) VALUES ('2025-04-25', 1, 3, 3, 'Travessa Gama, 789', 'Consultoria de segurança', 'Industrial', 'Projeto Consultoria Gama');
+INSERT INTO TB_PROJETO (PRJ_DATA, QUANTIDADE, CLIENTE_ID, PRJ_NUMERO, ENDERECO, OBSERVACAO, PRJ_AREA, PRJ_NOME) VALUES ('2025-04-30', 12, 1, 4, 'Alameda Delta, 101', 'Expansão do sistema de segurança', 'Residencial', 'Projeto Expansão Delta');
+INSERT INTO TB_PROJETO (PRJ_DATA, QUANTIDADE, CLIENTE_ID, PRJ_NUMERO, ENDERECO, OBSERVACAO, PRJ_AREA, PRJ_NOME) VALUES ('2025-05-05', 5, 4, 5, 'Praça Épsilon, 222', 'Atualização de software de monitoramento', 'Comercial', 'Projeto Update Épsilon');
+=======
+>>>>>>> branch 'master' of https://github.com/Robson-SA/Alarm-device-budget-manager.git
 INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('21001', 'Repetidor Audio e Visual 1');
 INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('21002', 'Repetidor Audio e Visual 2');
 INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('21003', 'Repetidor Audio e Visual 3');
