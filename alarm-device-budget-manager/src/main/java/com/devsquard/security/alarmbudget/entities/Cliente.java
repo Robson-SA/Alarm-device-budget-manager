@@ -1,9 +1,10 @@
 package com.devsquard.security.alarmbudget.entities;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -11,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "tb_cliente")
@@ -18,48 +20,82 @@ public class Cliente {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	private int contato;
-	private int telefone;
-	@Email
+
+	@NotBlank(message = "O nome é obrigatório")
+	private String nome;
+
+	@NotBlank(message = "O cnpj é obrigatório")
+	@Column(unique = true)
+	private String cnpj;
+
+
+	private String contato;
+
+	private String telefone;
+
+	@Email(message = "Informe um e-mail válido")
+	@NotBlank(message = "O e-mail é obrigatório")
 	private String email;
+
+	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
+	private Set<Projeto> projetos = new HashSet<>();
 	
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-    private List<Projeto> projetos = new ArrayList<>();
-	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)
-	private HashSet<Projeto>projetos;
-
-	public Cliente() {
-
-	}
-
-	public Cliente(Long id, int contato, int telefone, @Email String email) {
-		this.id = id;
+	
+	public Cliente(
+			@NotBlank(message = "O nome é obrigatório") 
+			String nome,
+			@NotBlank(message = "O cnpj é obrigatório") 
+			String cnpj, 
+			String contato, 
+			String telefone,
+			@Email(message = "Informe um e-mail válido") 
+			@NotBlank(message = "O e-mail é obrigatório") 
+			String email) {
+		super();
+		this.nome = nome;
+		this.cnpj = cnpj;
 		this.contato = contato;
 		this.telefone = telefone;
 		this.email = email;
 	}
 
+	public Cliente() {
+	}
+
+
 	public Long getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public String getNome() {
+		return nome;
 	}
 
-	public int getContato() {
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getCnpj() {
+		return cnpj;
+	}
+
+	public void setCnpj(String cnpj) {
+		this.cnpj = cnpj;
+	}
+
+	public String getContato() {
 		return contato;
 	}
 
-	public void setContato(int contato) {
+	public void setContato(String contato) {
 		this.contato = contato;
 	}
 
-	public int getTelefone() {
+	public String getTelefone() {
 		return telefone;
 	}
 
-	public void setTelefone(int telefone) {
+	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
 
@@ -71,6 +107,12 @@ public class Cliente {
 		this.email = email;
 	}
 
+	public Set<Projeto> getProjetos() {
+		return projetos;
+	}
 
+	public void setProjetos(HashSet<Projeto> projetos) {
+		this.projetos = projetos;
+	}
 
 }

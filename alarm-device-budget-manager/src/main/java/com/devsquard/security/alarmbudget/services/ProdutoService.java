@@ -16,8 +16,14 @@ import jakarta.transaction.Transactional;
 public class ProdutoService {
 	
 	@Autowired
-	private ProdutoRepository produtoRepository;
+	private final ProdutoRepository produtoRepository;
 	
+	
+	public ProdutoService(ProdutoRepository produtoRepository) {
+		super();
+		this.produtoRepository = produtoRepository;
+	}
+
 	@Transactional
 	public Produto save(ProdutoDTO dto) {
 		

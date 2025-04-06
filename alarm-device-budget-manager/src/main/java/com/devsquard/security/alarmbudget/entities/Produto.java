@@ -7,6 +7,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "tb_produto")
 public class Produto {
@@ -17,15 +18,18 @@ public class Produto {
 	@Column(name="PRO_ID")
 	private Long id;
 
+	
 	@Column(name="PRO_COD", unique = true)
+	@NotNull(message = "O codigo do produto é obrigatório")
 	private String codigo;
 	
 	
 	@Column(name="PRO_NOME")
+	@NotNull(message = "O codigo do produto é obrigatório")
 	private String nome;
 	
 	@ManyToOne
-    @JoinColumn(name = "projeto_id", nullable = true)
+    @JoinColumn(name = "PRO_PRJ_FK", nullable = true)
     private Projeto projeto;
 
 
@@ -34,6 +38,24 @@ public class Produto {
 		this.codigo = codigo;
 		this.nome = nome;
 	}
+	
+	// Implementar equals e hashCode para evitar duplicatas no HashSet
+	 @Override
+	    public boolean equals(Object o) {
+	        if (this == o) return true;
+	        if (!(o instanceof Projeto)) return false;
+	        Produto produto = (Produto) o;
+	        return id != null && id.equals(produto.id);
+	    }
+	 
+	 @Override
+	 public int hashCode() {
+	     return id != null ? id.hashCode() : 0;
+	 }
+	
+	
+	
+	
 	
 	public Produto() {
 		
