@@ -50,10 +50,6 @@ public class Produto {
 	     return id != null ? id.hashCode() : 0;
 	 }
 	
-	
-	
-	
-	
 	public Produto() {
 		
 	}

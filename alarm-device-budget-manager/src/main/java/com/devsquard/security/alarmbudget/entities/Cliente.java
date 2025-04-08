@@ -113,7 +113,7 @@ public class Cliente {
 		return projetos;
 	}
 
-	public void setProjetos(HashSet<Projeto> projetos) {
+	public void setProjetos(Set<Projeto> projetos) {
 		this.projetos = projetos;
 	}
 

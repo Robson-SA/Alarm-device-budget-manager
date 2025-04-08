@@ -2,6 +2,7 @@ package com.devsquard.security.alarmbudget.entities;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -45,7 +46,7 @@ public class Projeto {
 	private String observacao;
 
 	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private HashSet<Produto> produtos = new HashSet<>();
+	private Set<Produto> produtos = new HashSet<>();
 
 	@Column(name = "PRJ_DATA")
 	private LocalDate data;
@@ -63,7 +64,7 @@ public class Projeto {
 			Cliente cliente,
 			@NotNull(message = "A quantidade de items é obrigatório") 
 			Integer quantidade, String observacao,
-			HashSet<Produto> produtos, LocalDate data) {
+			Set<Produto> produtos, LocalDate data) {
 		super();
 		this.id = id;
 		this.codigo = codigo;
@@ -152,7 +153,7 @@ public class Projeto {
 		this.cliente = cliente;
 	}
 
-	public HashSet<Produto> getProdutos() {
+	public Set<Produto> getProdutos() {
 		return produtos;
 	}
 

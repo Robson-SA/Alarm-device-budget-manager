@@ -4,14 +4,27 @@ import java.time.LocalDate;
 
 import com.devsquard.security.alarmbudget.entities.Projeto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class ProjetoDTO {
 	
     private Long id;
+    
+    @NotBlank(message="O codigo do projeto e obrigatório")
     private Long codigo;
+    
+    @NotBlank(message="O nome do projeto e obrigatório")
     private String nome;
+    
+    @NotBlank(message="A área do projeto e obrigatório")
     private String area;
+    
+    @NotBlank(message="O endereço do projeto e obrigatório")
     private String endereco;
+    
+    @NotBlank(message="A quantidade do projeto e obrigatório")
     private Integer quantidade;
+    
     private String observacao;
     private LocalDate data;
 
