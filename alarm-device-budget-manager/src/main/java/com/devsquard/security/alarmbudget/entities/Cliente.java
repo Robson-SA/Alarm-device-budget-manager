@@ -23,20 +23,16 @@ public class Cliente {
 	private Long id;
 
 	@Size(min = 1, max = 100)
-	@NotBlank(message = "O nome é obrigatório")
 	private String nome;
 
-	@NotBlank(message = "O cnpj é obrigatório")
+	
 	@Column(unique = true)
 	private String cnpj;
-
 
 	private String contato;
 
 	private String telefone;
 
-	@Email(message = "Informe um e-mail válido")
-	@NotBlank(message = "O e-mail é obrigatório")
 	private String email;
 
 	@OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL)

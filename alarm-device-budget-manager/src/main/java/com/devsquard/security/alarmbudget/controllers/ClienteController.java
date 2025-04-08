@@ -1,4 +1,4 @@
-package com.devsquard.security.alarmbudget.controller;
+package com.devsquard.security.alarmbudget.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

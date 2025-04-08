@@ -65,7 +65,6 @@ public class Projeto {
 			@NotNull(message = "A quantidade de items é obrigatório") 
 			Integer quantidade, String observacao,
 			Set<Produto> produtos, LocalDate data) {
-		super();
 		this.id = id;
 		this.codigo = codigo;
 		this.nome = nome;
