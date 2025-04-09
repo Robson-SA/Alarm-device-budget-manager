@@ -40,7 +40,7 @@ public class ClienteController {
 		return ResponseEntity.ok(clienteDTO);
 	}
 	
-	@GetMapping("/cliente")
+	@GetMapping("/buscar")
     public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable) {
         Page<ClienteDTO> clientes = clienteService.findAll(pageable);
         return ResponseEntity.ok(clientes);
