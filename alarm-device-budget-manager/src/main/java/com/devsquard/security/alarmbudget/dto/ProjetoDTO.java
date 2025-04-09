@@ -44,6 +44,7 @@ public class ProjetoDTO {
     }
     
     public ProjetoDTO(Projeto entity) {
+		this.id = entity.getId();
         this.codigo = entity.getCodigo();
         this.nome = entity.getNome();
         this.area = entity.getArea();

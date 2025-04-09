@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.devsquard.security.alarmbudget.dto.ProdutoCodigoDTO;
 import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
-import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 import com.devsquard.security.alarmbudget.services.ProdutoService;
 
 import jakarta.validation.Valid;
