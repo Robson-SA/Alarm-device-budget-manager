@@ -38,15 +38,16 @@ public class ClienteDTO {
 	}
 
 	public ClienteDTO(Cliente entity) {
+		this.id = entity.getId();
 		this.nome = entity.getNome();
 		this.cnpj = entity.getCnpj();
 		this.contato = entity.getContato();
 		this.telefone = entity.getTelefone();
 		this.email = entity.getEmail();
-        this.projetos = entity.getProjetos()
-                .stream()
-                .map(ProjetoDTO::new)
-                .collect(Collectors.toList());
+		this.projetos = entity.getProjetos()
+				.stream()
+				.map(ProjetoDTO::new)
+				.collect(Collectors.toList());
 	}
 
 	public ClienteDTO() {
