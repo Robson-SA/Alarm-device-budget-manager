@@ -1,7 +1,5 @@
 package com.devsquard.security.alarmbudget.services;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -11,10 +9,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
-import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
-import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
 import com.devsquard.security.alarmbudget.entities.Cliente;
-import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
 
@@ -25,12 +20,6 @@ public class ClienteService{
 
 	@Autowired
 	private ClienteRepository clienteRepository;
-
-	
-	public ClienteService(ClienteRepository clienteRepository) {
-		this.clienteRepository = clienteRepository;
-	}
-
 
 	@Transactional
 	public Cliente save(ClienteDTO dto) {
@@ -51,7 +40,7 @@ public class ClienteService{
 	        p.setQuantidade(projDTO.getQuantidade());
 	        p.setObservacao(projDTO.getObservacao());
 	        p.setData(projDTO.getData());
-	        p.setCliente(cliente); // IMPORTANTE para persistir corretamente!
+	        p.setCliente(cliente);
 	        return p;
 	    }).collect(Collectors.toSet());
 
@@ -65,6 +54,15 @@ public class ClienteService{
 	public Page<ClienteDTO> findAll(Pageable pageable) {
 	    return clienteRepository.findAll(pageable)
 	            .map(ClienteDTO::new);
+	}
+	
+	@Transactional
+	public Page<ClienteDTO> findByNome(String nome, Pageable pageable) {
+		 Page<Cliente> clienteExiste = clienteRepository.findByNome(nome,pageable);
+				
+		 return clienteExiste.map(x -> new ClienteDTO(x));
+		 
+		
 	}
 	
 }

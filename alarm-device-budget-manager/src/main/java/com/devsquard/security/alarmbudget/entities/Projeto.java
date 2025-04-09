@@ -92,7 +92,6 @@ public class Projeto {
 		
 	}
 
-	// Implementar equals e hashCode para evitar duplicatas no HashSet
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

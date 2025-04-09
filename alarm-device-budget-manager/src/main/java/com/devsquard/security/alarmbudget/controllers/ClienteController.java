@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
@@ -22,12 +23,8 @@ import jakarta.validation.Valid;
 public class ClienteController {
 	
 	@Autowired
-	private final ClienteService clienteService;
+    private ClienteService clienteService;
 	
-	public ClienteController(ClienteService clienteService) {
-		super();
-		this.clienteService = clienteService;
-	}
 	
 	@PostMapping
 	public ResponseEntity<ClienteDTO> save(@RequestBody @Valid ClienteDTO dto) {
@@ -38,10 +35,17 @@ public class ClienteController {
 	}
 	
 	@GetMapping
+	public ResponseEntity<Page<ClienteDTO>> findByNome(@RequestParam(name = "nome", defaultValue = "") String nome, Pageable pageable){
+		Page<ClienteDTO> clienteDTO = clienteService.findByNome(nome, pageable);
+		return ResponseEntity.ok(clienteDTO);
+	}
+	
+	@GetMapping("/cliente")
     public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable) {
         Page<ClienteDTO> clientes = clienteService.findAll(pageable);
         return ResponseEntity.ok(clientes);
     }
+	
 	
 
 }
