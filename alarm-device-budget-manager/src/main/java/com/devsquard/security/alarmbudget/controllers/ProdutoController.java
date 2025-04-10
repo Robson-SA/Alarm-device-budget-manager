@@ -25,6 +25,11 @@ public class ProdutoController {
 	@Autowired
 	private ProdutoService service;
 
+	@GetMapping
+	public ResponseEntity<Page<ProdutoDTO>> findAll(@PageableDefault(size = 20) Pageable pageable) {
+		Page<ProdutoDTO> produtos = service.findAll(pageable);
+		return ResponseEntity.ok(produtos);
+	}
 
 	@GetMapping(value = ("/buscar"))
 	public ResponseEntity<Page<ProdutoDTO>> findByCodigo(@RequestParam(name = "codigo", defaultValue = "") String nome,
