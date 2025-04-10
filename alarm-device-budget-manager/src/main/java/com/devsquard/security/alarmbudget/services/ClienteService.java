@@ -7,18 +7,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-=======
->>>>>>> bf0330e4f944526013505fca7115f66dee930f9b
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
 import com.devsquard.security.alarmbudget.entities.Cliente;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
-
-import jakarta.transaction.Transactional;
+import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ClienteService{
@@ -31,32 +27,11 @@ public class ClienteService{
 		Cliente cliente = new Cliente();
 		
 		cliente.setNome(dto.getNome());
-<<<<<<< HEAD
 		cliente.setCnpj(dto.getCnpj());
 		cliente.setContato(dto.getContato());
 		cliente.setTelefone(dto.getTelefone());
 		cliente.setEmail(dto.getEmail());
 
-		Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
-			Projeto p = new Projeto();
-			p.setCodigo(projDTO.getCodigo());
-			p.setNome(projDTO.getNome());
-			p.setArea(projDTO.getArea());
-			p.setEndereco(projDTO.getEndereco());
-			p.setQuantidade(projDTO.getQuantidade());
-			p.setObservacao(projDTO.getObservacao());
-			p.setData(projDTO.getData());
-			p.setCliente(cliente);
-			return p;
-		}).collect(Collectors.toSet());
-
-		cliente.setProjetos(projetos);
-=======
-	    cliente.setCnpj(dto.getCnpj());
-	    cliente.setContato(dto.getContato());
-	    cliente.setTelefone(dto.getTelefone());
-	    cliente.setEmail(dto.getEmail());
-	      
 	    if (dto.getProjetos() != null) {
 	        Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
 	            Projeto p = new Projeto();
@@ -71,23 +46,6 @@ public class ClienteService{
 	            return p;
 	        }).collect(Collectors.toSet());
 
-	        cliente.setProjetos(projetos);
-	    }
-
-	    if (dto.getProjetos() != null) {
-	        Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
-	            Projeto p = new Projeto();
-	            p.setCodigo(projDTO.getCodigo());
-	            p.setNome(projDTO.getNome());
-	            p.setArea(projDTO.getArea());
-	            p.setEndereco(projDTO.getEndereco());
-	            p.setQuantidade(projDTO.getQuantidade());
-	            p.setObservacao(projDTO.getObservacao());
-	            p.setData(projDTO.getData());
-	            p.setCliente(cliente);
-	            return p;
-	        }).collect(Collectors.toSet());
->>>>>>> bf0330e4f944526013505fca7115f66dee930f9b
 
 	        cliente.setProjetos(projetos);
 	    }
@@ -110,7 +68,6 @@ public class ClienteService{
 		 
 		
 	}
-<<<<<<< HEAD
 
 	@Transactional(readOnly = true)
 	public ClienteDTO findById(Long id) {
@@ -124,7 +81,4 @@ public class ClienteService{
 		clienteRepository.deleteById(id);
 
 	}
-=======
-	
->>>>>>> bf0330e4f944526013505fca7115f66dee930f9b
 }
