@@ -7,18 +7,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
-<<<<<<< HEAD
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-=======
->>>>>>> bf0330e4f944526013505fca7115f66dee930f9b
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
 import com.devsquard.security.alarmbudget.entities.Cliente;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
+import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
 
-import jakarta.transaction.Transactional;
+
 
 @Service
 public class ClienteService{
