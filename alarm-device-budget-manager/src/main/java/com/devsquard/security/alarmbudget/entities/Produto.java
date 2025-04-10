@@ -36,7 +36,6 @@ public class Produto {
 		this.nome = nome;
 	}
 	
-	// Implementar equals e hashCode para evitar duplicatas no HashSet
 	 @Override
 	    public boolean equals(Object o) {
 	        if (this == o) return true;

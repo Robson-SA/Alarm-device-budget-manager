@@ -11,8 +11,10 @@ import com.devsquard.security.alarmbudget.entities.Produto;
 
 public interface ProdutoRepository extends JpaRepository<Produto, Long>{
 
-	Optional<Produto> findByCodigo(String codigo);
+	 Optional<Produto> findByCodigo(String codigo);
+	
 	 Page<Produto> findByCodigo(String codigo, Pageable pageable);
+	 
 	 Page<Produto> findAll(Pageable pageable);
 
 
