@@ -24,6 +24,7 @@ public class ClienteDTO {
 	@Email(message = "Informe um e-mail válido")
 	@NotBlank(message = "O e-mail é obrigatório")
 	private String email;
+	
     private List<ProjetoDTO> projetos;
 
 	public ClienteDTO(Long id, String nome, String cnpj, String contato, String telefone, String email,List<ProjetoDTO> projetos) {

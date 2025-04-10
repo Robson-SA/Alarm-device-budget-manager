@@ -37,4 +37,17 @@ INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, qu
 INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, quantidade, observacao, PRJ_DATA) VALUES (1002, 'Sistema de Monitoramento Remoto', 'Tecnologia', 'Av. Central, 456', 1, 8, 'Cliente solicitou câmera com acesso via app', '2024-12-15');
 INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, quantidade, observacao, PRJ_DATA) VALUES (1003, 'Controle de Acesso', 'Automação', 'Rua do Comércio, 89', 1, 5, 'Instalação de leitor biométrico', '2025-01-10');
 
+--INSERIDO DADOS NA TABELA TB_PRODUTO---
+
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210011', 'Sensor de movimento infravermelho');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210012', 'Sirene com luz estroboscópica');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210013', 'Detector de fumaça sem fio');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210014', 'Painel de alarme digital');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210015', 'Controle remoto para alarme');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210016', 'Módulo GSM para alarme');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210017', 'Sensor de abertura magnético');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210018', 'Câmera IP com infravermelho');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210019', 'Fonte de alimentação 12V');
+INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210020', 'Teclado de acesso touch');
+
 

@@ -26,25 +26,25 @@ public class ClienteService {
 		Cliente cliente = new Cliente();
 
 		cliente.setNome(dto.getNome());
-		cliente.setCnpj(dto.getCnpj());
-		cliente.setContato(dto.getContato());
-		cliente.setTelefone(dto.getTelefone());
-		cliente.setEmail(dto.getEmail());
+	    cliente.setCnpj(dto.getCnpj());
+	    cliente.setContato(dto.getContato());
+	    cliente.setTelefone(dto.getTelefone());
+	    cliente.setEmail(dto.getEmail());
 
-		Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
-			Projeto p = new Projeto();
-			p.setCodigo(projDTO.getCodigo());
-			p.setNome(projDTO.getNome());
-			p.setArea(projDTO.getArea());
-			p.setEndereco(projDTO.getEndereco());
-			p.setQuantidade(projDTO.getQuantidade());
-			p.setObservacao(projDTO.getObservacao());
-			p.setData(projDTO.getData());
-			p.setCliente(cliente);
-			return p;
-		}).collect(Collectors.toSet());
+	    Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
+	        Projeto p = new Projeto();
+	        p.setCodigo(projDTO.getCodigo());
+	        p.setNome(projDTO.getNome());
+	        p.setArea(projDTO.getArea());
+	        p.setEndereco(projDTO.getEndereco());
+	        p.setQuantidade(projDTO.getQuantidade());
+	        p.setObservacao(projDTO.getObservacao());
+	        p.setData(projDTO.getData());
+	        p.setCliente(cliente);
+	        return p;
+	    }).collect(Collectors.toSet());
 
-		cliente.setProjetos(projetos);
+	    cliente.setProjetos(projetos);
 
 		return clienteRepository.save(cliente);
 
