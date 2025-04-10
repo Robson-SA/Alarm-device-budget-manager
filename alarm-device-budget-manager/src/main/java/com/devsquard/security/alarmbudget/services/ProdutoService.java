@@ -32,7 +32,7 @@ public class ProdutoService {
 	}
 
 	@Transactional
-	public Page<ProdutoDTO> findAllPaged(Pageable pageable) {
+	public Page<ProdutoDTO> findAll(Pageable pageable) {
 		Page<Produto> produtos = produtoRepository.findAll(pageable);
 		return produtos.map(produto -> new ProdutoDTO(produto.getCodigo(), produto.getNome()));
 	}
