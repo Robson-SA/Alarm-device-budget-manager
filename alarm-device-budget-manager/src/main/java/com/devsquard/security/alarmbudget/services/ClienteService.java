@@ -16,8 +16,6 @@ import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
 import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
 
-
-
 @Service
 public class ClienteService{
 
@@ -82,5 +80,4 @@ public class ClienteService{
 		clienteRepository.deleteById(id);
 
 	}
-
 }

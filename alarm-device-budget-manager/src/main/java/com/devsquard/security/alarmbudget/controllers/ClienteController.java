@@ -27,7 +27,7 @@ public class ClienteController {
 	@Autowired
     private ClienteService clienteService;
 	
-		@GetMapping(value = ("/{id}"))
+	@GetMapping(value = ("/{id}"))
 	public ResponseEntity<ClienteDTO> findById(@PathVariable Long id) {
 		ClienteDTO dto = clienteService.findById(id);
 		return ResponseEntity.ok(dto);
