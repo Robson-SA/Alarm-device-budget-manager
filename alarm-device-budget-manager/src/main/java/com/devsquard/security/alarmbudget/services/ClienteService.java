@@ -11,13 +11,14 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
+import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
 import com.devsquard.security.alarmbudget.entities.Cliente;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
 import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
 
 @Service
-public class ClienteService{
+public class ClienteService {
 
 	@Autowired
 	private ClienteRepository clienteRepository;
@@ -25,46 +26,34 @@ public class ClienteService{
 	@Transactional
 	public Cliente save(ClienteDTO dto) {
 		Cliente cliente = new Cliente();
+		copyDtoToEntity(dto, cliente);
 		
-		cliente.setNome(dto.getNome());
-		cliente.setCnpj(dto.getCnpj());
-		cliente.setContato(dto.getContato());
-		cliente.setTelefone(dto.getTelefone());
-		cliente.setEmail(dto.getEmail());
+		if (dto.getProjetos() != null) {
+			Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
+				Projeto p = new Projeto();
+				copyDtoEntity(projDTO, p);
+				return p;
+			}).collect(Collectors.toSet());
 
-	    if (dto.getProjetos() != null) {
-	        Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
-	            Projeto p = new Projeto();
-	            p.setCodigo(projDTO.getCodigo());
-	            p.setNome(projDTO.getNome());
-	            p.setArea(projDTO.getArea());
-	            p.setEndereco(projDTO.getEndereco());
-	            p.setData(projDTO.getData());
-	            p.setCliente(cliente);
-	            return p;
-	        }).collect(Collectors.toSet());
+			cliente.setProjetos(projetos);
+		}
 
+		return clienteRepository.save(cliente);
 
-	        cliente.setProjetos(projetos);
-	    }
-
-	    return clienteRepository.save(cliente);
-		
 	}
-	
+
 	@Transactional
 	public Page<ClienteDTO> findAll(Pageable pageable) {
-	    return clienteRepository.findAll(pageable)
-	            .map(ClienteDTO::new);
+		return clienteRepository.findAll(pageable)
+				.map(ClienteDTO::new);
 	}
-	
+
 	@Transactional
 	public Page<ClienteDTO> findByNome(String nome, Pageable pageable) {
-		 Page<Cliente> clienteExiste = clienteRepository.findByNome(nome,pageable);
-				
-		 return clienteExiste.map(x -> new ClienteDTO(x));
-		 
-		
+		Page<Cliente> clienteExiste = clienteRepository.findByNome(nome, pageable);
+
+		return clienteExiste.map(x -> new ClienteDTO(x));
+
 	}
 
 	@Transactional(readOnly = true)
@@ -79,4 +68,43 @@ public class ClienteService{
 		clienteRepository.deleteById(id);
 
 	}
+
+	/*@Transactional
+	public @Valid ClienteDTO update(Long id,ClienteDTO dto) {
+		Cliente cliente = clienteRepository.getReferenceById(id);
+		copyDtoToEntity(dto, cliente);
+
+		if (dto.getProjetos() != null) {
+			cliente.getProjetos().clear();
+			Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
+				Projeto p = new Projeto();
+				copyDtoEntity(projDTO, p);
+				return p;
+			}).collect(Collectors.toSet());
+
+			cliente.setProjetos(projetos);
+		}
+
+		return clienteRepository.save(cliente);
+
+	}*/
+
+	private void copyDtoToEntity(ClienteDTO dto, Cliente cliente) {
+		cliente.setNome(dto.getNome());
+		cliente.setCnpj(dto.getCnpj());
+		cliente.setContato(dto.getContato());
+		cliente.setTelefone(dto.getTelefone());
+		cliente.setEmail(dto.getEmail());
+	}
+
+	private void copyDtoEntity(ProjetoDTO projDTO, Projeto p) {
+		p.setCodigo(projDTO.getCodigo());
+		p.setNome(projDTO.getNome());
+		p.setArea(projDTO.getArea());
+		p.setEndereco(projDTO.getEndereco());
+		p.setData(projDTO.getData());
+
+	}
+
+
 }
