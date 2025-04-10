@@ -40,13 +40,13 @@ public class ProdutoController {
     	return ResponseEntity.ok(produtos);
     }
     
-//    @DeleteMapping(value = ("/remover"))
-//    public ResponseEntity<String> deleteByCodigo(@RequestBody ProdutoCodigoDTO dto){
-//    	String mensagem = service.removeByCodigo(dto.getCodigo());
-//    	return ResponseEntity.ok(mensagem);
-//    	
-//    	
-//    }
+    @DeleteMapping(value = ("/remover"))
+    public ResponseEntity<String> deleteByCodigo(@RequestParam(name ="codigo", defaultValue = "") String codigo){
+    	String mensagem = service.removeByCodigo(codigo);
+    	return ResponseEntity.ok(mensagem);
+    	
+    	
+    }
     
 
 	@PostMapping
