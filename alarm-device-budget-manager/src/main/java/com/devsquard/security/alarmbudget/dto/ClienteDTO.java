@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 
 public class ClienteDTO {
+	
 	private Long id;
 
 	@NotBlank(message = "O nome é obrigatório")

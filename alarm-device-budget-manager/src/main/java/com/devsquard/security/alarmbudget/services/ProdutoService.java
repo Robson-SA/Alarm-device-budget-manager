@@ -46,16 +46,16 @@ public class ProdutoService {
 
 	}
 
-//	@Transactional
-//	public String removeByCodigo(String codigo) {
-//		Produto produto = produtoRepository.findByCodigo(codigo)
-//				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-//
-//		produtoRepository.delete(produto);
-//
-//		return "Produto com código " + codigo + " removido com sucesso!";
-//
-//	}
+	@Transactional
+	public String removeByCodigo(String codigo) {
+		Produto produto = produtoRepository.findByCodigo(codigo)
+				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+
+		produtoRepository.delete(produto);
+
+		return "Produto com código " + codigo + " removido com sucesso!";
+
+	}
 
 	@Transactional
 	public ProdutoDTO update(String codigo, ProdutoDTO dto) {
