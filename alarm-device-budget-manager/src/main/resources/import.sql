@@ -33,9 +33,9 @@ INSERT INTO tb_cliente (NOME, CNPJ, CONTATO, EMAIL, TELEFONE) VALUES ('Empresa T
 
 --INSERINDO DADOS NA TABELA TB_PROJETO---
 
-INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, quantidade, observacao, PRJ_DATA) VALUES (1001, 'Projeto Segurança Industrial', 'Segurança', 'Rua A, 123', 1, 10, 'Projeto piloto para teste de sensores', '2024-12-01');
-INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, quantidade, observacao, PRJ_DATA) VALUES (1002, 'Sistema de Monitoramento Remoto', 'Tecnologia', 'Av. Central, 456', 1, 8, 'Cliente solicitou câmera com acesso via app', '2024-12-15');
-INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, quantidade, observacao, PRJ_DATA) VALUES (1003, 'Controle de Acesso', 'Automação', 'Rua do Comércio, 89', 1, 5, 'Instalação de leitor biométrico', '2025-01-10');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1001, 'Projeto Segurança Industrial', 'Segurança', 'Rua A, 123', 1, '2024-12-01');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1002, 'Sistema de Monitoramento Remoto', 'Tecnologia', 'Av. Central, 456', 1, '2024-12-15');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1003, 'Controle de Acesso', 'Automação', 'Rua do Comércio, 89', 1, '2025-01-10');
 
 --INSERIDO DADOS NA TABELA TB_PRODUTO---
 

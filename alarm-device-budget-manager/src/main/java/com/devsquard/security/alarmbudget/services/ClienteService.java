@@ -39,8 +39,6 @@ public class ClienteService{
 	            p.setNome(projDTO.getNome());
 	            p.setArea(projDTO.getArea());
 	            p.setEndereco(projDTO.getEndereco());
-	            p.setQuantidade(projDTO.getQuantidade());
-	            p.setObservacao(projDTO.getObservacao());
 	            p.setData(projDTO.getData());
 	            p.setCliente(cliente);
 	            return p;

@@ -20,91 +20,46 @@ public class Projeto {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "PRJ_ID")
 	private Long id;
 
 	@Column(name = "PRJ_NUMERO")
 	private Long codigo;
 
 	@Column(name = "PRJ_NOME")
-	@NotNull(message = "O nome do projeto é obrigatório")
+
 	private String nome;
 
-	@NotNull(message = "O área do projeto é obrigatório")
 	@Column(name = "PRJ_AREA")
 	private String area;
 
-	@NotNull(message = "O endereço do projeto é obrigatório")
 	private String endereco;
 
 	@ManyToOne
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
-	@NotNull(message = "A quantidade de items é obrigatório")
-	private Integer quantidade;
-	
-	private String observacao;
-
 	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
-	private Set<Produto> produtos = new HashSet<>();
+	private Set<ItemDoProjeto> itens = new HashSet<>();
 
 	@Column(name = "PRJ_DATA")
 	private LocalDate data;
-	
-	
-	public Projeto(
-			Long id, 
-			Long codigo, 
-			@NotNull(message = "O nome do projeto é obrigatório") 
-			String nome,
-			@NotNull(message = "O área do projeto é obrigatório") 
-			String area,
-			@NotNull(message = "O endereço do projeto é obrigatório") 
-			String endereco, 
-			Cliente cliente,
-			@NotNull(message = "A quantidade de items é obrigatório") 
-			Integer quantidade, String observacao,
-			Set<Produto> produtos, LocalDate data) {
+
+	public Projeto(Long id, Long codigo, String nome, String area, String endereco, Cliente cliente,
+			Set<ItemDoProjeto> itens, LocalDate data) {
+		
 		this.id = id;
 		this.codigo = codigo;
 		this.nome = nome;
 		this.area = area;
 		this.endereco = endereco;
 		this.cliente = cliente;
-		this.quantidade = quantidade;
-		this.observacao = observacao;
-		this.produtos = produtos;
+		this.itens = itens;
 		this.data = data;
 	}
-	
+
 	public Projeto() {
-		
-	}
 
-	public Integer SomarQuantidadeItens() {
-		int total = 0;
-		for(int i = 1; i < produtos.size(); i++) {
-			
-			total += this.quantidade;
-		}
-		
-		return total;
-		
-	}
-
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (!(o instanceof Projeto))
-			return false;
-		Projeto projeto = (Projeto) o;
-		return id != null && id.equals(projeto.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return id != null ? id.hashCode() : 0;
 	}
 
 	public Long getId() {
@@ -151,14 +106,6 @@ public class Projeto {
 		this.cliente = cliente;
 	}
 
-	public Set<Produto> getProdutos() {
-		return produtos;
-	}
-
-	public void setProdutos(HashSet<Produto> produtos) {
-		this.produtos = produtos;
-	}
-
 	public LocalDate getData() {
 		return data;
 	}
@@ -167,24 +114,18 @@ public class Projeto {
 		this.data = data;
 	}
 
-	public Integer getQuantidade() {
-		return quantidade;
-	}
-
-	public void setQuantidade(Integer quantidade) {
-		this.quantidade = quantidade;
-	}
-
-	public String getObservacao() {
-		return observacao;
-	}
-
-	public void setObservacao(String observacao) {
-		this.observacao = observacao;
-	}
-
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Set<ItemDoProjeto> getItens() {
+		return itens;
+	}
+
+	public void setItens(Set<ItemDoProjeto> itens) {
+		this.itens = itens;
+	}
+	
+	
 
 }

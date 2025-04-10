@@ -5,5 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 
 public interface ProjetoRepository extends JpaRepository<Projeto, Long>{
+	
 
 }
