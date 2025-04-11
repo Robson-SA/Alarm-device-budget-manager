@@ -8,6 +8,8 @@ import jakarta.validation.constraints.Size;
 
 public class ProdutoDTO {
 	
+	private Long id;
+	
 	@NotNull(message = "O codigo do produto é obrigatório")
 	private String codigo;
 	
@@ -16,15 +18,14 @@ public class ProdutoDTO {
 	private String nome;
 
 
-	public ProdutoDTO(String codigo, String nome) {
-		
+	public ProdutoDTO(Long id, String codigo, String nome) {
+		this.id = id;
 		this.codigo = codigo;
 		this.nome = nome;
 	}
 	
-	
 	public ProdutoDTO(Produto entity) {
-		
+		this.id = entity.getId();
 		this.codigo = entity.getCodigo();
 		this.nome = entity.getNome();
 		
@@ -34,7 +35,13 @@ public class ProdutoDTO {
 		
 	}
 	
+	public Long getId() {
+		return id;
+	}
 	
+	public void setId(Long id) {
+		this.id = id;
+	}
 	
 	public String getCodigo() {
 		return codigo;

@@ -13,7 +13,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
-import jakarta.validation.constraints.NotNull;
 
 @Entity(name = "tb_projeto")
 public class Projeto {
@@ -24,10 +23,9 @@ public class Projeto {
 	private Long id;
 
 	@Column(name = "PRJ_NUMERO")
-	private Long codigo;
+	private String codigo;
 
 	@Column(name = "PRJ_NOME")
-
 	private String nome;
 
 	@Column(name = "PRJ_AREA")
@@ -45,7 +43,7 @@ public class Projeto {
 	@Column(name = "PRJ_DATA")
 	private LocalDate data;
 
-	public Projeto(Long id, Long codigo, String nome, String area, String endereco, Cliente cliente,
+	public Projeto(Long id, String codigo, String nome, String area, String endereco, Cliente cliente,
 			Set<ItemDoProjeto> itens, LocalDate data) {
 		
 		this.id = id;
@@ -66,11 +64,11 @@ public class Projeto {
 		return id;
 	}
 
-	public Long getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 

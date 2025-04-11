@@ -7,7 +7,6 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
 import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ProjetoRepository;
@@ -27,10 +26,10 @@ public class ProjetoService {
         return pages.map(ProjetoDTO::new);
     }
 
+  
     @Transactional(readOnly = true)
-    public ProjetoDTO findById(Long id) {
-        Optional<Projeto> obj = repository.findById(id);
-        Projeto entity = obj.orElseThrow(() -> new RuntimeException("Projeto não encontrado"));
+    public ProjetoDTO findByCodigo(String codigo) {
+        Projeto entity = repository.findByCodigo(codigo);
         return new ProjetoDTO(entity);
     }
 

@@ -36,6 +36,13 @@ INSERT INTO tb_cliente (NOME, CNPJ, CONTATO, EMAIL, TELEFONE) VALUES ('Empresa T
 INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1001, 'Projeto Segurança Industrial', 'Segurança', 'Rua A, 123', 1, '2024-12-01');
 INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1002, 'Sistema de Monitoramento Remoto', 'Tecnologia', 'Av. Central, 456', 1, '2024-12-15');
 INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1003, 'Controle de Acesso', 'Automação', 'Rua do Comércio, 89', 1, '2025-01-10');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1004, 'Sistema de Iluminação', 'Elétrica', 'Rua das Laranjeiras, 200', 2, '2025-02-15');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1005, 'CFTV Empresarial', 'Segurança', 'Avenida Central, 1200', 3, '2025-03-01');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1006, 'Sistema de Incêndio', 'Prevenção', 'Rua Nova, 45', 1, '2025-03-22');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1007, 'Integração de Alarmes', 'Automação', 'Travessa da Paz, 18', 2, '2025-04-05');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1008, 'Portaria Remota', 'Tecnologia', 'Alameda Azul, 77', 4, '2025-04-12');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1009, 'Monitoramento 24h', 'Segurança', 'Rua Verde, 88', 3, '2025-04-20');
+INSERT INTO tb_projeto (PRJ_NUMERO, PRJ_NOME, PRJ_AREA, endereco, cliente_id, PRJ_DATA) VALUES (1010, 'Controle de Clima', 'Automação', 'Rua das Árvores, 99', 5, '2025-04-25');
 
 --INSERIDO DADOS NA TABELA TB_PRODUTO---
 
@@ -50,4 +57,16 @@ INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210018', 'Câmera IP com inf
 INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210019', 'Fonte de alimentação 12V');
 INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210020', 'Teclado de acesso touch');
 
+--- INSERINDO DADOS NA TABELA TB_ITEM_PROJETO----
+
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (1, 2, 10, 'Observação A');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (1, 3, 5, 'Observação B');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (2, 1, 8, 'Observação C');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (2, 4, 12, 'Observação D');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (3, 5, 3, 'Observação E');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (4, 2, 6, 'Observação F');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (4, 1, 15, 'Observação G');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (5, 3, 9, 'Observação H');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (5, 5, 4, 'Observação I');
+INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (3, 4, 7, 'Observação J');
 

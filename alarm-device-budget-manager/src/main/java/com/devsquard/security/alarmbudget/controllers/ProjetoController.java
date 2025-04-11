@@ -30,8 +30,8 @@ public class ProjetoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity <ProjetoDTO> findById(@PathVariable Long id) {
-        ProjetoDTO projetoDTO = service.findById(id);
+    public ResponseEntity <ProjetoDTO> findByCodigo(@PathVariable String id) {
+        ProjetoDTO projetoDTO = service.findByCodigo(id);
     	return ResponseEntity.ok(projetoDTO);
     }
 

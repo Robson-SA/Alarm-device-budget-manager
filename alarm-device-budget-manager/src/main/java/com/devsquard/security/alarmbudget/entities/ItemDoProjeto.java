@@ -8,25 +8,24 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.NotNull;
 
-@Entity
+@Entity(name="tb_item_projeto")
 public class ItemDoProjeto {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	@ManyToOne
-	@JoinColumn(name = "projeto_id")
-	private Projeto projeto;
+    @ManyToOne
+    @JoinColumn(name = "pro_cod")
+    private Produto produto;
 
-	@ManyToOne
-	@JoinColumn(name = "pro_id")
-	private Produto produto;
+    @ManyToOne
+    @JoinColumn(name = "prj_numero")
+    private Projeto projeto;
 
-	@NotNull(message = "A quantidade de items é obrigatório")
-	private Integer quantidade;
+    private Integer quantidade;
 
-	private String observacao;
+    private String observacao;
 
 	public Integer somarQuantidade(Integer mais) {
 		if (this.quantidade == null) {

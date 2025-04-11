@@ -39,24 +39,10 @@ public class Produto {
 		this.nome = nome;
 	}
 	
-//	 @Override
-//	    public boolean equals(Object o) {
-//	        if (this == o) return true;
-//	        if (!(o instanceof Projeto)) return false;
-//	        Produto produto = (Produto) o;
-//	        return id != null && id.equals(produto.id);
-//	    }
-//	 
-//	 @Override
-//	 public int hashCode() {
-//	     return id != null ? id.hashCode() : 0;
-//	 }
-	
 	public Produto() {
 		
 	}
 	
-
 	public Long getId() {
 		return id;
 	}

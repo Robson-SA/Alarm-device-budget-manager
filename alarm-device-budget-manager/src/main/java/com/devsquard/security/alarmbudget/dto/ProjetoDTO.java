@@ -12,7 +12,7 @@ public class ProjetoDTO {
     private Long id;
     
     @NotNull(message="O codigo do projeto e obrigatório")
-    private Long codigo;
+    private String codigo;
     
     @NotBlank(message="O nome do projeto e obrigatório")
     private String nome;
@@ -28,7 +28,7 @@ public class ProjetoDTO {
     public ProjetoDTO() {
     }
 
-    public ProjetoDTO(Long id, Long codigo, String nome, String area, String endereco,LocalDate data) {
+    public ProjetoDTO(Long id, String codigo, String nome, String area, String endereco,LocalDate data) {
         this.id = id;
         this.codigo = codigo;
         this.nome = nome;
@@ -54,11 +54,11 @@ public class ProjetoDTO {
 		this.id = id;
 	}
 
-	public Long getCodigo() {
+	public String getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(Long codigo) {
+	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
 
