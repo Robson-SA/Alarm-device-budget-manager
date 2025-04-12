@@ -6,9 +6,11 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.server.ResponseStatusException;
 
 import com.devsquard.security.alarmbudget.dto.ClienteDTO;
 import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
@@ -16,6 +18,8 @@ import com.devsquard.security.alarmbudget.entities.Cliente;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ClienteRepository;
 import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
+
+import jakarta.validation.Valid;
 
 @Service
 public class ClienteService {
@@ -69,9 +73,11 @@ public class ClienteService {
 
 	}
 
-	/*@Transactional
-	public @Valid ClienteDTO update(Long id,ClienteDTO dto) {
-		Cliente cliente = clienteRepository.getReferenceById(id);
+	@Transactional
+	public @Valid ClienteDTO update(Long id, ClienteDTO dto) {
+		Cliente cliente = clienteRepository.findById(id)
+				.orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Cliente não encontrado"));
+
 		copyDtoToEntity(dto, cliente);
 
 		if (dto.getProjetos() != null) {
@@ -79,15 +85,15 @@ public class ClienteService {
 			Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
 				Projeto p = new Projeto();
 				copyDtoEntity(projDTO, p);
+				p.setCliente(cliente);
 				return p;
 			}).collect(Collectors.toSet());
-
-			cliente.setProjetos(projetos);
+			cliente.getProjetos().addAll(projetos);
 		}
 
-		return clienteRepository.save(cliente);
-
-	}*/
+		Cliente updatedCliente = clienteRepository.save(cliente);
+		return new ClienteDTO(updatedCliente);
+	}
 
 	private void copyDtoToEntity(ClienteDTO dto, Cliente cliente) {
 		cliente.setNome(dto.getNome());
@@ -107,6 +113,5 @@ public class ClienteService {
 		p.setData(projDTO.getData());
 
 	}
-
 
 }
