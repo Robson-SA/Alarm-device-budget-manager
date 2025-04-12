@@ -34,9 +34,8 @@ public class ProdutoController {
 	}
 
 	@GetMapping(value = ("/buscar"))
-	public ResponseEntity<Page<ProdutoDTO>> findByCodigo(@RequestParam(name = "codigo", defaultValue = "") String nome,
-			Pageable pageable) {
-		Page<ProdutoDTO> produtos = service.findByCodigo(nome, pageable);
+	public ResponseEntity<ProdutoDTO> findByCodigo(@RequestParam(name = "codigo", defaultValue = "") String nome) {
+		ProdutoDTO produtos = service.findByCodigo(nome);
 		return ResponseEntity.ok(produtos);
 	}
 

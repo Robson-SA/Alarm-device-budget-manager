@@ -9,6 +9,7 @@ import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
 import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service
@@ -21,12 +22,8 @@ public class ProdutoService {
 	public ProdutoDTO save(ProdutoDTO dto) {
 
 		Produto produto = new Produto();
-
-		produto.setCodigo(dto.getCodigo());
-		produto.setNome(dto.getNome());
-
-		produtoRepository.save(produto);
-
+		copyToEntity(produto, dto);
+		produto = produtoRepository.save(produto);
 		return new ProdutoDTO(produto);
 
 	}
@@ -34,23 +31,22 @@ public class ProdutoService {
 	@Transactional
 	public Page<ProdutoDTO> findAll(Pageable pageable) {
 		Page<Produto> produtos = produtoRepository.findAll(pageable);
-		return produtos.map(produto -> new ProdutoDTO(produto.getCodigo(), produto.getNome()));
+		return produtos.map(produto -> new ProdutoDTO(produto));
 	}
 
 	@Transactional
-	public Page<ProdutoDTO> findByCodigo(String codigo, Pageable pageable) {
+	public ProdutoDTO findByCodigo(String codigo) {
 
-		Page<Produto> produto = produtoRepository.findByCodigo(codigo, pageable);
-
-		return produto.map(x -> new ProdutoDTO(x));
+		Produto produto = produtoRepository.findByCodigo(codigo);
+				
+		return new ProdutoDTO(produto);
 
 	}
 
 	@Transactional
 	public String removeByCodigo(String codigo) {
-		Produto produto = produtoRepository.findByCodigo(codigo)
-				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
-
+		Produto produto = produtoRepository.findByCodigo(codigo);
+		
 		produtoRepository.delete(produto);
 
 		return "Produto com código " + codigo + " removido com sucesso!";
@@ -59,12 +55,9 @@ public class ProdutoService {
 
 	@Transactional
 	public ProdutoDTO update(String codigo, ProdutoDTO dto) {
-		Produto updateProduto = produtoRepository.findByCodigo(codigo)
-				.orElseThrow(() -> new RuntimeException("Produto não encontrado"));
+		Produto updateProduto = produtoRepository.findByCodigo(codigo);
 
-		if (dto.getCodigo() != null && !updateProduto.getCodigo().equals(dto.getCodigo())) {
-			updateProduto.setCodigo(dto.getCodigo());
-		}else if(dto.getCodigo() != null && !dto.getCodigo().equals(dto.getCodigo())) {
+		if (dto.getCodigo() != null && !dto.getCodigo().equals(updateProduto.getCodigo())) {
 			updateProduto.setCodigo(dto.getCodigo());
 		}
 		if (dto.getNome() != null && !dto.getNome().equals(updateProduto.getNome())) {
@@ -75,6 +68,12 @@ public class ProdutoService {
 
 		return new ProdutoDTO(updateProduto);
 
+	}
+
+	public void copyToEntity(Produto entity, ProdutoDTO dto) {
+		entity.setId(dto.getId());
+		entity.setCodigo(dto.getCodigo());
+		entity.setNome(dto.getNome());
 	}
 
 }

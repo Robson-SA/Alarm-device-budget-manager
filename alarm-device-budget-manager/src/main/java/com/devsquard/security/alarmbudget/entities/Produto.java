@@ -1,5 +1,9 @@
 package com.devsquard.security.alarmbudget.entities;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity(name = "tb_produto")
 public class Produto {
@@ -25,35 +30,19 @@ public class Produto {
 	@Column(name="PRO_NOME")
 	private String nome;
 	
-	@ManyToOne
-    @JoinColumn(name = "PRO_PRJ_FK", nullable = true)
-    private Projeto projeto;
-
+	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+	private Set<ItemDoProjeto> itens = new HashSet<>();
+	
 
 	public Produto(String codigo, String nome) {
-		super();
 		this.codigo = codigo;
 		this.nome = nome;
 	}
-	
-	 @Override
-	    public boolean equals(Object o) {
-	        if (this == o) return true;
-	        if (!(o instanceof Projeto)) return false;
-	        Produto produto = (Produto) o;
-	        return id != null && id.equals(produto.id);
-	    }
-	 
-	 @Override
-	 public int hashCode() {
-	     return id != null ? id.hashCode() : 0;
-	 }
 	
 	public Produto() {
 		
 	}
 	
-
 	public Long getId() {
 		return id;
 	}

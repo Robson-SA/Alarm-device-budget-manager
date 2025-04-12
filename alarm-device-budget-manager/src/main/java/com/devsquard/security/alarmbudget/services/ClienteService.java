@@ -31,7 +31,7 @@ public class ClienteService {
 	public Cliente save(ClienteDTO dto) {
 		Cliente cliente = new Cliente();
 		copyDtoToEntity(dto, cliente);
-
+		
 		if (dto.getProjetos() != null) {
 			Set<Projeto> projetos = dto.getProjetos().stream().map(projDTO -> {
 				Projeto p = new Projeto();
@@ -108,8 +108,6 @@ public class ClienteService {
 		p.setNome(projDTO.getNome());
 		p.setArea(projDTO.getArea());
 		p.setEndereco(projDTO.getEndereco());
-		p.setQuantidade(projDTO.getQuantidade());
-		p.setObservacao(projDTO.getObservacao());
 		p.setData(projDTO.getData());
 
 	}
