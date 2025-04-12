@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,19 +29,26 @@ public class ProdutoController {
 	private ProdutoService service;
 
 	@GetMapping
-	public ResponseEntity<Page<ProdutoDTO>> findAll(@PageableDefault(size = 20) Pageable pageable) {
+	public ResponseEntity<Page<ProdutoDTO>> findAll(@PageableDefault(sort="nome") Pageable pageable) {
 		Page<ProdutoDTO> produtos = service.findAll(pageable);
 		return ResponseEntity.ok(produtos);
 	}
+	
+	@GetMapping(value = ("buscarId/{id}"))
+	public ResponseEntity<ProdutoDTO> findById(@PathVariable Long id){
+		ProdutoDTO produto = service.findById(id);
+		return ResponseEntity.ok(produto);
+	}
+	
 
-	@GetMapping(value = ("/buscar"))
-	public ResponseEntity<ProdutoDTO> findByCodigo(@RequestParam(name = "codigo", defaultValue = "") String nome) {
+	@GetMapping(value = ("/buscar/{codigo}"))
+	public ResponseEntity<ProdutoDTO> findByCodigo(@PathVariable String nome) {
 		ProdutoDTO produtos = service.findByCodigo(nome);
 		return ResponseEntity.ok(produtos);
 	}
 
-	@DeleteMapping(value = ("/remover"))
-	public ResponseEntity<String> deleteByCodigo(@RequestParam(name = "codigo", defaultValue = "") String codigo) {
+	@DeleteMapping(value = ("/remover/{codigo}"))
+	public ResponseEntity<String> deleteByCodigo(@PathVariable String codigo) {
 		String mensagem = service.removeByCodigo(codigo);
 		return ResponseEntity.ok(mensagem);
 
@@ -55,8 +63,8 @@ public class ProdutoController {
 
 	}
 
-	@PutMapping(value = ("/update"))
-	public ResponseEntity<ProdutoDTO> update(@RequestParam(name = "codigo", defaultValue = "") String codigo,
+	@PutMapping(value = ("/update/{codigo}"))
+	public ResponseEntity<ProdutoDTO> update(@PathVariable String codigo,
 			@RequestBody ProdutoDTO dto) {
 
 		ProdutoDTO produto = service.update(codigo, dto);

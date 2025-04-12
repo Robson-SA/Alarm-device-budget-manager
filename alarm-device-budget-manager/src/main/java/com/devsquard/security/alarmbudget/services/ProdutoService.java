@@ -1,5 +1,7 @@
 package com.devsquard.security.alarmbudget.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,6 +34,13 @@ public class ProdutoService {
 	public Page<ProdutoDTO> findAll(Pageable pageable) {
 		Page<Produto> produtos = produtoRepository.findAll(pageable);
 		return produtos.map(produto -> new ProdutoDTO(produto));
+	}
+	
+	@Transactional
+	public ProdutoDTO findById(Long id) {
+		Produto produto = produtoRepository.findById(id)
+				 .orElseThrow(() -> new EntityNotFoundException("Produto não encontrado com id: " + id));
+		return new ProdutoDTO(produto);
 	}
 
 	@Transactional
