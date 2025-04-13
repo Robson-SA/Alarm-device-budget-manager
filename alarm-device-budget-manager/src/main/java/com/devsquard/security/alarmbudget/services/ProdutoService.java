@@ -45,9 +45,7 @@ public class ProdutoService {
 
 	@Transactional
 	public ProdutoDTO findByCodigo(String codigo) {
-
-		Produto produto = produtoRepository.findByCodigo(codigo);
-				
+		Produto produto = produtoRepository.findByCodigo(codigo);			
 		return new ProdutoDTO(produto);
 
 	}

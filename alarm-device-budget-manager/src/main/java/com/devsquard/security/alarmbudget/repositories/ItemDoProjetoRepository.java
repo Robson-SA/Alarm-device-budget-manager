@@ -6,4 +6,5 @@ import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
 
 public interface ItemDoProjetoRepository extends JpaRepository<ItemDoProjeto, Long> {
 
+	
 }

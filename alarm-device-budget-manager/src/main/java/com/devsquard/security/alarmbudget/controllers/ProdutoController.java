@@ -42,8 +42,8 @@ public class ProdutoController {
 	
 
 	@GetMapping(value = ("/buscar/{codigo}"))
-	public ResponseEntity<ProdutoDTO> findByCodigo(@PathVariable String nome) {
-		ProdutoDTO produtos = service.findByCodigo(nome);
+	public ResponseEntity<ProdutoDTO> findByCodigo(@PathVariable String codigo) {
+		ProdutoDTO produtos = service.findByCodigo(codigo);
 		return ResponseEntity.ok(produtos);
 	}
 

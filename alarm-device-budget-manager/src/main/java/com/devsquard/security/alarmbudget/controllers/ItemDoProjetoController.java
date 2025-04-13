@@ -6,7 +6,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,6 +39,18 @@ public class ItemDoProjetoController {
 		Page<ItemDoProjetoDTO> itemsDTO = itemDoProjetoService.findAll(pageable);
 		return ResponseEntity.ok(itemsDTO);
 		
+	}
+	
+	@GetMapping(value = ("/buscarId/{id}"))
+	public ResponseEntity<ItemDoProjetoDTO> findById(@PathVariable Long id){
+		ItemDoProjetoDTO itemDto = itemDoProjetoService.findById(id);
+		return ResponseEntity.ok(itemDto);
+	}
+	
+	@PutMapping(value = ("/update/{id}"))
+	public ResponseEntity<ItemDoProjetoDTO> update(@PathVariable Long id, @Valid @RequestBody ItemDoProjetoDTO dto) {
+	    ItemDoProjetoDTO itemDto = itemDoProjetoService.update(id, dto);
+	    return ResponseEntity.ok(itemDto);
 	}
 	
 }
