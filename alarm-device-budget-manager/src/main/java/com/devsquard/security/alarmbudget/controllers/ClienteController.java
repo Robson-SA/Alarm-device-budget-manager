@@ -34,6 +34,12 @@ public class ClienteController {
 		return ResponseEntity.ok(dto);
 	}
 	
+	@GetMapping("/")
+    public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable) {
+        Page<ClienteDTO> clientes = clienteService.findAll(pageable);
+        return ResponseEntity.ok(clientes);
+    }
+	
 	@PostMapping
 	public ResponseEntity<ClienteDTO> save(@RequestBody @Valid ClienteDTO dto) {
 		Cliente clienteSalvo = clienteService.save(dto);
@@ -47,12 +53,7 @@ public class ClienteController {
 		Page<ClienteDTO> clienteDTO = clienteService.findByNome(nome, pageable);
 		return ResponseEntity.ok(clienteDTO);
 	}
-	
-	@GetMapping("/buscar")
-    public ResponseEntity<Page<ClienteDTO>> findAll(Pageable pageable) {
-        Page<ClienteDTO> clientes = clienteService.findAll(pageable);
-        return ResponseEntity.ok(clientes);
-    }
+
 	
 	@DeleteMapping(value = ("/{id}"))
 	public ResponseEntity<Void> delete(@PathVariable Long id) {
@@ -60,7 +61,7 @@ public class ClienteController {
 		return ResponseEntity.noContent().build();
 	}
 
-	 	@PutMapping(value = ("/{id}"))
+	@PutMapping(value = ("/{id}"))
 	public ResponseEntity<ClienteDTO> update(@PathVariable Long id,@Valid @RequestBody ClienteDTO dto) {
 		dto = clienteService.update(id, dto);
 		return ResponseEntity.ok(dto);

@@ -129,4 +129,16 @@ public class ItemDoProjetoService {
 	            .orElseThrow(() -> new ResourceNotFoundException("Item do Projeto not found with id: " + id));
 	}
 	
+	@Transactional
+	public String delete(Long id) {
+		ItemDoProjeto item = itemDoProjetoRepository.findById(id)
+		        .orElseThrow(() -> new EntityNotFoundException("Codigo não encontrado: " + id));
+		
+		itemDoProjetoRepository.delete(item);
+		String mensagem = "O item com o id " +  item.getId() + " foi removido com sucesso!";
+	
+		return mensagem;
+	}
+	
+	
 }
