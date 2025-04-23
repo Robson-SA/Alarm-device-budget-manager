@@ -31,3 +31,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Arquivo de configuração sensível
+src/main/resources/application-prod.properties
+

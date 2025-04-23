@@ -9,7 +9,6 @@ import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
 import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 
-import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service

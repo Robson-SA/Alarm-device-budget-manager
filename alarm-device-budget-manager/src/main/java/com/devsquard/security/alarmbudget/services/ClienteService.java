@@ -48,7 +48,7 @@ public class ClienteService {
 
 	@Transactional
 	public Page<ClienteDTO> findAll(Pageable pageable) {
-		return clienteRepository.findAll(pageable)
+		return clienteRepository.findClientesWithProjetos(pageable)
 				.map(ClienteDTO::new);
 	}
 
