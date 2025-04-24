@@ -37,7 +37,7 @@ public class Projeto {
 	@JoinColumn(name = "cliente_id", nullable = false)
 	private Cliente cliente;
 
-	@OneToMany(mappedBy = "projeto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "id.projeto")
 	private Set<ItemDoProjeto> itens = new HashSet<>();
 
 	@Column(name = "PRJ_DATA")

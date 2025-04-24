@@ -1,80 +1,23 @@
 package com.devsquard.security.alarmbudget.entities;
 
+import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 
-@Entity(name="tb_item_projeto")
+@Entity(name = "tb_item_projeto")
 public class ItemDoProjeto {
 
-	@Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@EmbeddedId
+	private ItemDoProjetoPK id = new ItemDoProjetoPK();
 
-    @ManyToOne
-    @JoinColumn(name = "pro_cod")
-    private Produto produto;
+	private Integer quantidade;
 
-    @ManyToOne
-    @JoinColumn(name = "prj_numero")
-    private Projeto projeto;
+	private String observacao;
 
-    private Integer quantidade;
-
-    private String observacao;
-
-	public Integer somarQuantidade(Integer mais) {
-		if (this.quantidade == null) {
-			this.quantidade = 0;
-		}
-		this.quantidade += mais;
-		return this.quantidade;
-	}
-	
-	public ItemDoProjeto() {
-		
-	}
-	
-	@Override
-	public boolean equals(Object o) {
-		if (this == o) return true;
-		if (o == null || getClass() != o.getClass()) return false;
-		
-		ItemDoProjeto that = (ItemDoProjeto) o;
-		return id != null && id.equals(that.id);
-	}
-
-	@Override
-	public int hashCode() {
-		return getClass().hashCode();
-	}
-
-	
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public Projeto getProjeto() {
-		return projeto;
-	}
-
-	public void setProjeto(Projeto projeto) {
-		this.projeto = projeto;
-	}
-
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
+	public ItemDoProjeto(Produto produto,Projeto projeto,Integer quantidade, String observacao) {
+		id.setProduto(produto);
+		id.setProjeto(projeto);
+		this.quantidade = quantidade;
+		this.observacao = observacao;
 	}
 
 	public Integer getQuantidade() {
@@ -92,5 +35,19 @@ public class ItemDoProjeto {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
+	
+	public Produto getProduto() {
+		return id.getProduto();
+	}
+	public void setProduto(Produto produto) {
+		id.setProduto(produto);
+	}
+	
+	public Projeto getProjeto() {
+		return id.getProjeto();
+	}
 
+	public void setProjeto(Projeto projeto) {
+		id.setProjeto(projeto);
+	}
 }

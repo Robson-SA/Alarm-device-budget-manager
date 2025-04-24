@@ -2,23 +2,28 @@ package com.devsquard.security.alarmbudget.services;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
+import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
+import com.devsquard.security.alarmbudget.entities.ItemDoProjetoPK;
+import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.entities.Projeto;
+import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 import com.devsquard.security.alarmbudget.repositories.ProjetoRepository;
+import com.devsquard.security.alarmbudget.services.exceptions.ResourceNotFoundException;
 
 @Service
 public class ProjetoService {
-
-    private final ProjetoRepository repository;
-
-    public ProjetoService(ProjetoRepository repository) {
-        this.repository = repository;
-    }
+	
+	@Autowired
+    private  ProjetoRepository repository;
+	@Autowired
+	private ProdutoRepository produtoRepository;
 
     @Transactional(readOnly = true)
     public Page<ProjetoDTO> findAll(Pageable pageable) {
@@ -68,5 +73,21 @@ public class ProjetoService {
         entity.setArea(dto.getArea());
         entity.setEndereco(dto.getEndereco());
         entity.setData(dto.getData());
+        entity.getItens().clear();
+
+     
+
+        dto.getList().forEach(itemDTO -> {
+            Produto produto = produtoRepository.findById(itemDTO.getProdutoid())
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado: " + itemDTO.getProdutoid()));
+
+            ItemDoProjeto item = new ItemDoProjeto();
+            item.setProduto(produto);
+            item.setProjeto(entity);
+            item.setQuantidade(itemDTO.getQuantidade());
+            item.setObservacao(itemDTO.getObservacao());
+
+            entity.getItens().add(item);
+        });
     }
 }

@@ -1,7 +1,10 @@
 package com.devsquard.security.alarmbudget.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -24,6 +27,9 @@ public class ProjetoDTO {
     private String endereco;
     
     private LocalDate data;
+    
+
+    private List<ItemDoProjetoDTO> itens = new ArrayList<>();
 
     public ProjetoDTO() {
     }
@@ -44,6 +50,10 @@ public class ProjetoDTO {
         this.area = entity.getArea();
         this.endereco = entity.getEndereco();
         this.data = entity.getData();
+        
+        for (ItemDoProjeto item : entity.getItens()) {
+            this.itens.add(new ItemDoProjetoDTO(item));
+        }
     }
 
 	public Long getId() {
@@ -93,5 +103,13 @@ public class ProjetoDTO {
 	public void setData(LocalDate data) {
 		this.data = data;
 	}
+
+    public List<ItemDoProjetoDTO> getItens() {
+        return itens;
+    }
+
+    public void setItens(List<ItemDoProjetoDTO> itens) {
+        this.itens = itens;
+    }
 
 }
