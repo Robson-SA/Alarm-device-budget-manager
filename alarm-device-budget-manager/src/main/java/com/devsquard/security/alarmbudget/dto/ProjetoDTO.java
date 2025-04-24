@@ -111,5 +111,7 @@ public class ProjetoDTO {
     public void setItens(List<ItemDoProjetoDTO> itens) {
         this.itens = itens;
     }
+    
+    
 
 }

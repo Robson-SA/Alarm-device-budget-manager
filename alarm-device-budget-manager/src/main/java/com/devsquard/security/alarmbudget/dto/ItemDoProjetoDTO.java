@@ -4,43 +4,42 @@ import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
 
 public class ItemDoProjetoDTO {
 
-	private Long produtoid;
-	private String nome;
+	private Long produtoId;
+	private Long projetoId;
 	private Integer quantidade;
 	private String observacao;
 
 	public ItemDoProjetoDTO() {
-
 	}
 
-	public ItemDoProjetoDTO(Long produtoid, String nome, Integer quantidade, String observacao) {
-		this.produtoid = produtoid;
-		this.nome = nome;
+	public ItemDoProjetoDTO(Long produtoId, Long projetoId, Integer quantidade, String observacao) {
+		this.produtoId = produtoId;
+		this.projetoId = projetoId;
 		this.quantidade = quantidade;
 		this.observacao = observacao;
 	}
 
 	public ItemDoProjetoDTO(ItemDoProjeto entity) {
-		this.produtoid = entity.getProduto().getId();
-		this.nome = entity.getProjeto().getNome();
+		this.produtoId = entity.getProduto().getId();
+		this.projetoId = entity.getProjeto().getId();
 		this.quantidade = entity.getQuantidade();
 		this.observacao = entity.getObservacao();
 	}
 
-	public Long getProdutoid() {
-		return produtoid;
+	public Long getProdutoId() {
+		return produtoId;
 	}
 
-	public void setProdutoid(Long produtoid) {
-		this.produtoid = produtoid;
+	public void setProdutoId(Long produtoId) {
+		this.produtoId = produtoId;
 	}
 
-	public String getNome() {
-		return nome;
+	public Long getProjetoId() {
+		return projetoId;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setProjetoId(Long projetoId) {
+		this.projetoId = projetoId;
 	}
 
 	public Integer getQuantidade() {
@@ -58,5 +57,4 @@ public class ItemDoProjetoDTO {
 	public void setObservacao(String observacao) {
 		this.observacao = observacao;
 	}
-
 }

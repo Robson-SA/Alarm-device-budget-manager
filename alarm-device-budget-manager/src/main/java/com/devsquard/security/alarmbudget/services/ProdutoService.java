@@ -1,7 +1,5 @@
 package com.devsquard.security.alarmbudget.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -11,6 +9,7 @@ import com.devsquard.security.alarmbudget.dto.ProdutoDTO;
 import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
 
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 
 @Service

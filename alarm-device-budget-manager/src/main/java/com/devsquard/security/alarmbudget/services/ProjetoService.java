@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.devsquard.security.alarmbudget.dto.ProjetoDTO;
 import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
-import com.devsquard.security.alarmbudget.entities.ItemDoProjetoPK;
 import com.devsquard.security.alarmbudget.entities.Produto;
 import com.devsquard.security.alarmbudget.entities.Projeto;
 import com.devsquard.security.alarmbudget.repositories.ProdutoRepository;
@@ -77,9 +76,9 @@ public class ProjetoService {
 
      
 
-        dto.getList().forEach(itemDTO -> {
-            Produto produto = produtoRepository.findById(itemDTO.getProdutoid())
-                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado: " + itemDTO.getProdutoid()));
+        dto.getItens().forEach(itemDTO -> {
+            Produto produto = produtoRepository.findById(itemDTO.getProdutoId())
+                .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado: " + itemDTO.getProdutoId()));
 
             ItemDoProjeto item = new ItemDoProjeto();
             item.setProduto(produto);

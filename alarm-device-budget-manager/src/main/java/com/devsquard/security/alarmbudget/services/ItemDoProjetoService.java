@@ -1,13 +1,10 @@
 package com.devsquard.security.alarmbudget.services;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.devsquard.security.alarmbudget.controllers.ItemDoProjetoController;
 import com.devsquard.security.alarmbudget.dto.ItemDoProjetoDTO;
 import com.devsquard.security.alarmbudget.dto.ItemDoProjetoInsertDTO;
 import com.devsquard.security.alarmbudget.entities.ItemDoProjeto;
@@ -36,7 +33,6 @@ public class ItemDoProjetoService {
 	@Transactional
 	public ItemDoProjetoDTO save(ItemDoProjetoInsertDTO dto) {
 
-	    // Buscar entidades usando os IDs
 	    Projeto projeto = projetoRepository.findByCodigo(dto.getProjetoId().toString());
 	    if (projeto == null) {
 	        throw new ResourceNotFoundException("Projeto não encontrado");
@@ -47,7 +43,6 @@ public class ItemDoProjetoService {
 	        throw new ResourceNotFoundException("Produto não encontrado");
 	    }
 
-	    // Criar a entidade
 	    ItemDoProjeto item = new ItemDoProjeto();
 	    item.setProjeto(projeto);
 	    item.setProduto(produto);
@@ -56,78 +51,54 @@ public class ItemDoProjetoService {
 
 	    item = itemDoProjetoRepository.save(item);
 
-	    return new ItemDoProjetoDTO(item, projeto, produto);
+	    return new ItemDoProjetoDTO(item);
 	}
 	
 	@Transactional
-	public Page<ItemDoProjetoDTO> findAll(Pageable pageable){
-		Page<ItemDoProjeto> page = itemDoProjetoRepository.findAll(pageable);
-
-		return page.map(item -> {
-			Projeto projeto = projetoRepository.findByCodigo(item.getProjeto().getCodigo());
-			
-			Produto produto = produtoRepository.findByCodigo(item.getProduto().getCodigo());
-
-			return new ItemDoProjetoDTO(item, projeto, produto);
-		});
-	}
+    public Page<ItemDoProjetoDTO> findAll(Pageable pageable) {
+        Page<ItemDoProjeto> page = itemDoProjetoRepository.findAll(pageable);
+        return page.map(ItemDoProjetoDTO::new);
+    }
 
 	
 	@Transactional
 	public ItemDoProjetoDTO findById(Long id) {
 		ItemDoProjeto item = itemDoProjetoRepository.findById(id)
 		        .orElseThrow(() -> new EntityNotFoundException("Codigo não encontrado: " + id));
-		    
-		    // Buscar projeto e produto associados
-		    Projeto projeto = projetoRepository.findByCodigo(item.getProjeto().getCodigo());
-		    Produto produto = produtoRepository.findByCodigo(item.getProduto().getCodigo());
-		    
-		    // Criar e retornar o DTO
-		    return new ItemDoProjetoDTO(item, projeto, produto);
+		    return new ItemDoProjetoDTO(item);
 		
 	}
 
-	@Transactional
-	public ItemDoProjetoDTO update(Long id, ItemDoProjetoDTO dto) {
-	    return itemDoProjetoRepository.findById(id)
+	 @Transactional
+	    public ItemDoProjetoDTO update(Long id, ItemDoProjetoDTO dto) {
+	        return itemDoProjetoRepository.findById(id)
 	            .map(existingItem -> {
-	                // Update quantidade only if different and valid
-	                Optional.ofNullable(dto.getQuantidade())
-	                        .filter(quantidade -> quantidade > 0)
-	                        .filter(quantidade -> !quantidade.equals(existingItem.getQuantidade()))
-	                        .ifPresent(existingItem::setQuantidade);
-	                
-	                // Update observacao only if different
-	                Optional.ofNullable(dto.getObservacao())
-	                        .filter(obs -> !obs.equals(existingItem.getObservacao()))
-	                        .ifPresent(existingItem::setObservacao);
-	                
-	                // Update produto relationship only if different
-	                Optional.ofNullable(dto.getProduto())
-	                        .filter(produtoDTO -> !produtoDTO.getId().equals(
-	                                existingItem.getProduto() != null ? existingItem.getProduto().getId() : null))
-	                        .map(produtoDTO -> produtoRepository.findById(produtoDTO.getId())
-	                                .orElseThrow(() -> new ResourceNotFoundException("Produto not found")))
-	                        .ifPresent(existingItem::setProduto);
-	                
-	                // Update projeto relationship only if different
-	                Optional.ofNullable(dto.getProjeto())
-	                        .filter(projetoDTO -> !projetoDTO.getId().equals(
-	                                existingItem.getProjeto() != null ? existingItem.getProjeto().getId() : null))
-	                        .map(projetoDTO -> projetoRepository.findById(projetoDTO.getId())
-	                                .orElseThrow(() -> new ResourceNotFoundException("Projeto not found")))
-	                        .ifPresent(existingItem::setProjeto);
-	                
-	                // Save only if any changes were made (could track changes with a boolean flag)
-	                ItemDoProjeto updatedItem = itemDoProjetoRepository.save(existingItem);
-	                
-	                // Convert back to DTO and return
-	                Produto produto = updatedItem.getProduto();
-	                Projeto projeto = updatedItem.getProjeto();
-	                return new ItemDoProjetoDTO(updatedItem, projeto, produto);
+	                if (dto.getQuantidade() != null && dto.getQuantidade() > 0 &&
+	                    !dto.getQuantidade().equals(existingItem.getQuantidade())) {
+	                    existingItem.setQuantidade(dto.getQuantidade());
+	                }
+
+	                if (dto.getObservacao() != null &&
+	                    !dto.getObservacao().equals(existingItem.getObservacao())) {
+	                    existingItem.setObservacao(dto.getObservacao());
+	                }
+
+	                // Atualização de produto via produtoid
+	                if (dto.getProdutoId() != null &&
+	                    (existingItem.getProduto() == null || !dto.getProdutoId().equals(existingItem.getProduto().getId()))) {
+	                    Produto produto = produtoRepository.findById(dto.getProdutoId())
+	                            .orElseThrow(() -> new ResourceNotFoundException("Produto não encontrado"));
+	                    existingItem.setProduto(produto);
+	                }
+
+	                // NÃO está mais atualizando projeto pois DTO atual não carrega ID de projeto
+	                // Se necessário, inclua `projetoid` no DTO
+
+	                existingItem = itemDoProjetoRepository.save(existingItem);
+	                return new ItemDoProjetoDTO(existingItem);
 	            })
-	            .orElseThrow(() -> new ResourceNotFoundException("Item do Projeto not found with id: " + id));
-	}
+	            .orElseThrow(() -> new ResourceNotFoundException("Item do Projeto não encontrado com id: " + id));
+	    }
 	
 	@Transactional
 	public String delete(Long id) {
@@ -135,7 +106,7 @@ public class ItemDoProjetoService {
 		        .orElseThrow(() -> new EntityNotFoundException("Codigo não encontrado: " + id));
 		
 		itemDoProjetoRepository.delete(item);
-		String mensagem = "O item com o id " +  item.getId() + " foi removido com sucesso!";
+		String mensagem = "O item com o id " +  item.getProduto().getId() + " foi removido com sucesso!";
 	
 		return mensagem;
 	}

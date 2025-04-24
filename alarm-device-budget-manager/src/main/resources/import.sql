@@ -59,14 +59,10 @@ INSERT INTO tb_produto (PRO_COD, PRO_NOME) VALUES ('210020', 'Teclado de acesso 
 
 --- INSERINDO DADOS NA TABELA TB_ITEM_PROJETO----
 
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (1, 2, 10, 'Observação A');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (1, 3, 5, 'Observação B');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (2, 1, 8, 'Observação C');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (2, 4, 12, 'Observação D');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (3, 5, 3, 'Observação E');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (4, 2, 6, 'Observação F');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (4, 1, 15, 'Observação G');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (5, 3, 9, 'Observação H');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (5, 5, 4, 'Observação I');
-INSERT INTO tb_item_projeto (prj_numero, pro_cod, quantidade, observacao) VALUES (3, 4, 7, 'Observação J');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (10, 1, 1, 'Observação A');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (15, 2, 1, 'Observação B');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (20, 1, 2, 'Observação C');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (8, 3, 2, 'Observação D');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (12, 2, 3, 'Observação E');
+INSERT INTO tb_item_projeto (quantidade, produto_id, projeto_id, observacao) VALUES (5, 3, 1, 'Observação F');
 

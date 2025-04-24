@@ -3,7 +3,6 @@ package com.devsquard.security.alarmbudget.entities;
 import java.util.HashSet;
 import java.util.Set;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +27,7 @@ public class Produto {
 	@Column(name="PRO_NOME")
 	private String nome;
 	
-	@OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "id.produto")
 	private Set<ItemDoProjeto> itens = new HashSet<>();
 	
 

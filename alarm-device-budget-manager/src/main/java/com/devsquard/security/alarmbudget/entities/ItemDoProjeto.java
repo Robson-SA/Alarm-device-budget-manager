@@ -19,6 +19,10 @@ public class ItemDoProjeto {
 		this.quantidade = quantidade;
 		this.observacao = observacao;
 	}
+	
+	public ItemDoProjeto() {
+		
+	}
 
 	public Integer getQuantidade() {
 		return quantidade;
